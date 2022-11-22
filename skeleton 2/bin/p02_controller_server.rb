@@ -9,6 +9,22 @@ class MyController < ControllerBase
       redirect_to("/cats")
     end
   end
+
+  def render_content(content, content_type='text/html')
+        #throw error if @rendered is truee
+        res.write(content)
+        res['Content-Type'] = content_type
+        nil
+  end
+
+  def redirect_to(url)
+        res.status = 302
+        res['Location'] = url
+  end
+
+
+
+
 end
 app = Proc.new do |env|
   req = Rack::Request.new(env)
